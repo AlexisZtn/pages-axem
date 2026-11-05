@@ -362,6 +362,11 @@ h3{font-family:'Fraunces',serif;font-weight:900;font-variation-settings:"SOFT" 1
 .pdfz{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:20px 24px;border-radius:24px;background:var(--creme)}
 .pdfz p{margin:0;font-size:17px;font-weight:600}
 
+/* plein écran : la vidéo entière, jamais rognée */
+.film-box video{object-fit:contain}
+video:fullscreen{object-fit:contain;background:#0B0D12}
+video:-webkit-full-screen{object-fit:contain;background:#0B0D12}
+
 </style></head><body>
 <!-- Page proposition ESA, v3 du 05/11/2026 (retours d'Alexis) : titres globaux + sous-titre, plus de repère bleu, gestes Awwwards par section. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
