@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Questionnaire pré-audit · Search Factory</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,900,100;1,9..144,600,100&family=Instrument+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2349FF;--blue-l:#EEF1FF;--ink:#0B0D12;--paper:#FFFDF7;--mute:#6E737D;--line:rgba(11,13,18,.13);--cream:#F3EEDF}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:#3A3D45;font:17px/1.5 'Instrument Sans',system-ui,sans-serif}
+.prog{position:fixed;top:0;left:0;right:0;height:5px;background:rgba(35,73,255,.12);z-index:20}
+.prog i{display:block;height:100%;width:0;background:var(--blue);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+header.hero{background:var(--blue);color:#fff;padding:72px 16px 64px;overflow:hidden;position:relative}
+.hero .in{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.hero .sur{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-bottom:18px}
+.hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(40px,8vw,72px);line-height:.98;letter-spacing:-.03em}
+.hero h1 em{font-style:italic;font-weight:600;color:#D9E0FF}
+.hero h1 .l{display:inline-block;opacity:0;transform:translateY(.5em);animation:mont .7s cubic-bezier(.2,.8,.2,1) forwards}
+.hero p.chapo{margin-top:22px;font-size:19px;max-width:600px;opacity:0;animation:fond .8s .5s forwards}
+.chrono{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:8px 14px;border-radius:99px;font:500 13px 'IBM Plex Mono',monospace;opacity:0;animation:fond .8s .7s forwards}
+.chrono svg{width:18px;height:18px}
+.chrono .aig{transform-origin:12px 12px;animation:tour 6s linear infinite}
+.bulles span{position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.22)}
+.bulles span:nth-child(1){width:420px;height:420px;right:-140px;top:-160px;animation:flotte 14s ease-in-out infinite}
+.bulles span:nth-child(2){width:240px;height:240px;right:120px;bottom:-150px;animation:flotte 11s ease-in-out infinite reverse}
+@keyframes mont{to{opacity:1;transform:none}}@keyframes fond{to{opacity:1}}@keyframes tour{to{transform:rotate(360deg)}}
+@keyframes flotte{50%{transform:translate(-18px,14px)}}
+main{max-width:760px;margin:0 auto;padding:36px 16px 160px}
+.etapes{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.etapes a{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--mute);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:6px 12px;transition:all .3s}
+.etapes a.fait{background:var(--blue);border-color:var(--blue);color:#fff}
+.encart{background:var(--cream);padding:18px 20px;margin-top:20px;font-size:15.5px;border-radius:14px}
+.encart p+p{margin-top:8px}
+section.bloc{margin-top:56px;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+section.bloc.vu{opacity:1;transform:none}
+section.bloc h2{font-family:'Fraunces',serif;font-weight:900;color:var(--ink);font-size:30px;letter-spacing:-.02em;line-height:1.1}
+section.bloc h2 small{display:block;font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.q{padding:22px 0;border-bottom:1px solid var(--line);position:relative}
+.q>label,.q>.lab{display:block;font-weight:600;color:var(--ink);font-size:17.5px}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue-l);font:500 12px 'IBM Plex Mono',monospace;color:var(--blue);margin-right:10px;vertical-align:1px;transition:all .3s}
+.q.ok .num{background:var(--blue);color:#fff}
+.pq{font-size:14.5px;color:var(--mute);margin:6px 0 10px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s;margin-top:8px}
+textarea{resize:vertical;min-height:88px}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(35,73,255,.12)}
+textarea::placeholder,input::placeholder{color:#A4A8B0}
+.cases{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.cases label{display:flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:99px;padding:8px 14px;background:#fff;font-size:15px;cursor:pointer;transition:all .2s;user-select:none;position:relative}
+.cases input{position:absolute;opacity:0;pointer-events:none}
+.cases label::before{content:"";width:14px;height:14px;border-radius:4px;border:1.5px solid #B9BDC6;transition:all .2s}
+.cases label:has(input:checked){border-color:var(--blue);background:var(--blue-l);color:var(--ink);transform:scale(1.03)}
+.cases label:has(input:checked)::before{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff}
+.cases label:has(input:focus-visible){box-shadow:0 0 0 4px rgba(35,73,255,.2)}
+.pole{display:none}.pole.on{display:block;animation:fond .5s}
+.pole-vide{font-size:15px;color:var(--mute);padding:18px 0;border-bottom:1px solid var(--line)}
+.barre{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#FAF6EA;display:flex;gap:14px;align-items:center;justify-content:center;padding:12px 16px;flex-wrap:wrap;z-index:10}
+.barre b{font:500 13px 'IBM Plex Mono',monospace}
+button{font:600 15px 'Instrument Sans',sans-serif;padding:11px 20px;border-radius:99px;border:0;cursor:pointer;background:var(--blue);color:#fff;transition:transform .15s,opacity .2s}
+button:hover{transform:translateY(-1px)}button:disabled{opacity:.5;cursor:wait;transform:none}
+button.o{background:none;border:1px solid rgba(250,246,234,.6);color:#FAF6EA}
+#msg{font-size:14px;max-width:560px;text-align:center;width:100%}
+#msg:empty{display:none}
+.fin{display:none;position:fixed;inset:0;background:var(--blue);color:#fff;z-index:30;place-items:center;padding:24px;text-align:center}
+.fin.on{display:grid;animation:fond .4s}
+.fin svg{width:96px;height:96px;margin:0 auto 22px;display:block}
+.fin circle{stroke-dasharray:283;stroke-dashoffset:283;animation:trace .8s .1s forwards}
+.fin path{stroke-dasharray:60;stroke-dashoffset:60;animation:trace .5s .8s forwards}
+@keyframes trace{to{stroke-dashoffset:0}}
+.fin h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,6vw,54px);letter-spacing:-.02em;line-height:1}
+.fin p{margin:16px auto 0;max-width:460px;font-size:18px;opacity:.92}
+.fin button{margin-top:28px;background:#fff;color:var(--blue)}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}.hero h1 .l,.hero p.chapo,.chrono,section.bloc{opacity:1;transform:none}}
+</style>
+<body>
+<div class="prog"><i id="prog"></i></div>
+<header class="hero">
+<div class="bulles"><span></span><span></span></div>
+<div class="in">
+<p class="sur">AXEM IA × Search Factory · Audit IA du lundi 14 décembre</p>
+<h1 id="titre">Votre agence et l'IA, en <em>15 minutes</em></h1>
+<p class="chapo">Ce questionnaire est pour la direction : Philippe et Achille, une seule réponse à deux. Il nous donne les chiffres et le contexte avant le 14 décembre, pour que la journée serve à creuser vos vrais sujets avec chaque pôle.</p>
+<span class="chrono"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path class="aig" d="M12 12V7"/></svg>14 questions · 15 à 20 minutes</span>
+</div>
+</header>
+<main>
+<nav class="etapes" aria-label="Parties">
+<a href="#p1" data-p="p1">1 · L'agence</a><a href="#p2" data-p="p2">2 · L'IA et les outils</a><a href="#p3" data-p="p3">3 · Vos attentes</a><a href="#p4" data-p="p4">4 · Préparer le 14</a>
+</nav>
+<div class="encart">
+<p><b>Répondez à peu près.</b> Un ordre de grandeur suffit, et « je ne sais pas » est une bonne réponse : on le cherchera ensemble.</p>
+<p><b>Restez court.</b> Le détail (les étapes, le temps passé, les écrans) se verra ensemble le 14, pôle par pôle.</p>
+<p><b>Retour souhaité au plus tard le vendredi 4 décembre.</b> Vous pouvez fermer la page et revenir plus tard sur ce même navigateur : vos réponses restent en place jusqu'à l'envoi.</p>
+</div>
+
+<section class="bloc" id="p1"><h2><small>1 · L'agence</small>Vos chiffres</h2>
+<div class="q"><label for="q01"><span class="num">01</span>Combien de personnes par pôle, salariés et freelances ?</label>
+<p class="pq">SEO et GEO, Paid, Web, Analytics, direction et fonctions support.</p>
+<textarea id="q01" data-q="01 Effectif par pôle" placeholder="Exemple : SEO 6 dont 1 freelance, Paid 5, Web 3, Analytics 2, direction et support 3."></textarea></div>
+<div class="q"><label for="q02"><span class="num">02</span>Combien de clients actifs, quelle part en forfait mensuel, et quel poids pour chaque pôle dans le chiffre d'affaires ?</label>
+<textarea id="q02" data-q="02 Clients, forfaits et poids des pôles" placeholder="Exemple : 60 clients, 45 en mensuel. SEO 40 %, Paid 35 %, Web 20 %, Analytics 5 %."></textarea></div>
+<div class="q"><label for="q03"><span class="num">03</span>Quelle part du temps de l'équipe est facturée, et quelles tâches non facturées reviennent chaque mois ?</label>
+<p class="pq">C'est souvent là que l'IA rend le plus de temps.</p>
+<textarea id="q03" data-q="03 Temps facturé et tâches non facturées" placeholder="Exemple : environ 70 % facturé. Reporting mensuel, réunions internes, devis et relances."></textarea></div>
+<div class="q"><label for="q04"><span class="num">04</span>Qui décide des outils et du budget IA, et à partir de quel montant faut-il l'accord de la direction ?</label>
+<input type="text" id="q04" data-q="04 Décision outils et budget IA"></div>
+</section>
+
+<section class="bloc" id="p2"><h2><small>2 · L'IA et les outils</small>L'inventaire</h2>
+<div class="q"><label for="q05"><span class="num">05</span>Vos abonnements d'IA : l'outil, l'offre, le nombre de comptes, le coût par mois, et qui paie (l'agence ou la personne)</label>
+<p class="pq">Si la liste fait partie des documents que vous nous envoyez, écrivez simplement « voir la liste ».</p>
+<textarea id="q05" data-q="05 Abonnements IA et coûts" placeholder="Exemple : Claude Team 8 comptes, 25 € par mois chacun, payé par l'agence. ChatGPT Plus 4 comptes. Gemini inclus dans Google Workspace."></textarea></div>
+<div class="q"><label for="q06"><span class="num">06</span>Ce qui tourne déjà avec l'IA sans intervention manuelle : scripts, appels d'API, connecteurs, skills partagés</label>
+<p class="pq">Pour chacun : ce qu'il fait, qui l'a construit, et ce qu'il coûte par mois si vous le savez.</p>
+<textarea id="q06" data-q="06 Automatisations IA existantes" placeholder="Exemple : scripts Apps Script avec l'API Gemini pour les méta-descriptions (Philippe, coût inconnu), connecteurs Google Ads et GA4 dans Claude (pôle Paid)."></textarea></div>
+<div class="q"><label for="q07"><span class="num">07</span>Les outils métier de chaque pôle</label>
+<textarea id="q07" data-q="07 Outils métier par pôle" placeholder="Exemple : SEO Semrush, Screaming Frog, Search Console. Paid Google Ads, Meta. Analytics GA4, Looker Studio. Gestion de projet et CRM : …"></textarea></div>
+<div class="q"><label for="q08"><span class="num">08</span>Vos règles sur l'IA : une charte écrite, des clients qui l'interdisent ou l'encadrent, des données sensibles, qui s'occupe du RGPD</label>
+<textarea id="q08" data-q="08 Règles, contraintes clients et RGPD" placeholder="Exemple : pas de charte écrite. Deux clients interdisent l'envoi de leurs données à une IA. RGPD suivi par un prestataire."></textarea></div>
+</section>
+
+<section class="bloc" id="p3"><h2><small>3 · Vos attentes</small>Ce que l'audit doit changer</h2>
+<div class="q"><label for="q09"><span class="num">09</span>Vos 3 objectifs pour l'agence sur les 12 prochains mois</label>
+<textarea id="q09" data-q="09 Objectifs à 12 mois"></textarea></div>
+<div class="q"><label for="q10"><span class="num">10</span>À la restitution, quelle décision voulez-vous pouvoir prendre ?</label>
+<p class="pq">C'est notre critère de réussite : tout le rapport sera construit pour y répondre.</p>
+<textarea id="q10" data-q="10 Décision attendue à la restitution" placeholder="Exemple : savoir quelles licences garder, et si on lance l'outil publicitaire en interne ou avec un prestataire."></textarea></div>
+<div class="q"><label for="q11"><span class="num">11</span>L'outil de création publicitaire : pour quels clients et quels formats, quel volume par mois, et ce qu'il doit faire mieux qu'aujourd'hui, en une phrase</label>
+<textarea id="q11" data-q="11 Outil de création publicitaire" placeholder="Exemple : 15 clients Paid, environ 200 visuels par mois sur Meta et Google Ads. Il doit sortir toutes les déclinaisons d'un brief en une fois."></textarea></div>
+</section>
+
+<section class="bloc" id="p4"><h2><small>4 · Préparer le 14</small>Ce qu'on regardera ensemble</h2>
+<div class="q"><label for="q12"><span class="num">12</span>Pour chaque pôle, la tâche qui prend le plus de temps à l'équipe</label>
+<p class="pq">Juste son nom et sa fréquence : nous la décortiquerons avec le pôle le 14.</p>
+<textarea id="q12" data-q="12 Tâche la plus longue par pôle" placeholder="Exemple : SEO les briefs de contenu, 30 par mois. Paid les déclinaisons de visuels, chaque semaine. Analytics le reporting, tous les mois."></textarea></div>
+<div class="q"><label for="q13"><span class="num">13</span>L'usage de l'IA qui marche le mieux chez vous aujourd'hui, et un essai abandonné</label>
+<p class="pq">Une ligne pour chacun : nous demanderons à le voir à l'écran le 14.</p>
+<textarea id="q13" data-q="13 Meilleur usage et essai abandonné"></textarea></div>
+<div class="q"><label for="q14"><span class="num">14</span>Pour chaque pôle, qui rencontrer : la personne la plus avancée avec l'IA et celle qui s'en sert le moins</label>
+<p class="pq">Ce sont les 2 à 4 personnes de chaque atelier.</p>
+<textarea id="q14" data-q="14 Personnes à rencontrer par pôle" placeholder="Exemple : SEO Camille (avancée), Hugo (peu à l'aise). Paid …"></textarea></div>
+<div class="q"><label for="nom"><span class="num">✓</span>Qui a répondu ?</label>
+<input type="text" id="nom" data-q="Répondu par" placeholder="Exemple : Philippe et Achille"></div>
+</section>
+</main>
+
+<div class="barre"><b id="n">0 / 15</b><button id="env">Envoyer nos réponses</button><button class="o" id="cop">Copier nos réponses</button><span id="msg" role="status"></span></div>
+
+<div class="fin" id="fin" role="dialog" aria-modal="true" aria-labelledby="fin-t"><div>
+<svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="45"/><path d="M30 52l13 13 27-29"/></svg>
+<h2 id="fin-t">Merci, c'est reçu.</h2>
+<p>Vos réponses sont bien arrivées chez AXEM IA. Nous préparons la journée du lundi 14 décembre à partir d'elles.</p>
+<button id="revoir">Revoir nos réponses</button>
+</div></div>
+
+<script>
+const ENVOI='https://script.google.com/macros/s/AKfycbyUxBx5uDxYJPrgOEIzQvGy9iORtZckLi9ORoEJl00ZsDHp1v-XBiQ48mstftMqp4XrAA/exec', K='sf-pre-audit';
+const $=s=>document.querySelector(s);
+(()=>{const h=$('#titre');let i=0;const f=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const fr=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){fr.append(w);return}const s=document.createElement('span');s.className='l';s.textContent=w;s.style.animationDelay=(i++*70)+'ms';fr.append(s)});c.replaceWith(fr)}else f(c)})};f(h)})();
+const champs=()=>[...document.querySelectorAll('[data-q]')];
+const val=el=>el.value.trim();
+function sauver(){const s={};champs().forEach(el=>{s[el.id]=el.value});try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}}
+function charger(){let s={};try{s=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}champs().forEach(el=>{if(s[el.id]!=null)el.value=s[el.id]});}
+function compter(){const qs=[...document.querySelectorAll('.q')];let n=0;qs.forEach(q=>{const ok=[...q.querySelectorAll('[data-q]')].some(el=>val(el));q.classList.toggle('ok',ok);if(ok)n++});
+ $('#n').textContent=n+' / '+qs.length;$('#prog').style.width=Math.round(100*n/qs.length)+'%';
+ document.querySelectorAll('.etapes a').forEach(a=>{const qq=[...document.getElementById(a.dataset.p).querySelectorAll('.q')];a.classList.toggle('fait',qq.every(q=>q.classList.contains('ok')))});}
+function donnees(){const d={};champs().forEach(el=>{d[el.dataset.q]=val(el)});return d;}
+function texte(){return 'Questionnaire pré-audit, Search Factory\n\n'+champs().map(el=>el.dataset.q+' :\n'+(val(el)||'(sans réponse)')).join('\n\n');}
+function maj(){sauver();compter();}
+charger();compter();
+document.addEventListener('input',maj);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('section.bloc').forEach(s=>io.observe(s));
+const msg=t=>$('#msg').textContent=t;
+async function copier(){try{await navigator.clipboard.writeText(texte());return true}catch(e){return false}}
+$('#cop').onclick=async()=>msg(await copier()?'Réponses copiées : vous pouvez les coller dans un mail à Alexis Zeitoun (AXEM IA).':'Copie impossible : sélectionnez le texte à la main.');
+$('#env').onclick=async()=>{
+ const b=$('#env');b.disabled=true;b.textContent='Envoi en cours…';msg('');
+ const d=donnees();let ok=false;
+ try{const r=await fetch(ENVOI,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)});const j=await r.json();ok=!!j.ok;}
+ catch(e){try{await fetch(ENVOI,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)});ok=true;}catch(e2){ok=false;}}
+ b.disabled=false;b.textContent='Envoyer nos réponses';
+ if(ok){try{localStorage.setItem(K+'-envoye',new Date().toISOString())}catch(e){}$('#fin').classList.add('on');}
+ else{const c=await copier();msg('L\'envoi n\'a pas abouti, réessayez dans un instant.'+(c?' Vos réponses sont aussi copiées : vous pouvez les coller dans un mail à Alexis Zeitoun (AXEM IA).':''));}
+};
+$('#revoir').onclick=()=>$('#fin').classList.remove('on');
+</script>
+</body>
+</html>
