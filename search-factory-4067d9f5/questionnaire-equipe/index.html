@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Questionnaire avant l'audit IA · Search Factory</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,900,100&family=Instrument+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2349FF;--ink:#0B0D12;--paper:#FFFDF7;--mute:#6E737D;--line:rgba(11,13,18,.14);--cream:#F3EEDF}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:#3A3D45;font:17px/1.5 'Instrument Sans',system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 140px}
+h1,h2{font-family:'Fraunces',serif;font-weight:900;color:var(--ink);letter-spacing:-.02em}
+h1{font-size:clamp(36px,7vw,58px);line-height:1.02}
+h2{font-size:26px;margin:48px 0 4px}
+h2 small{display:block;font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.sur{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.intro{margin:18px 0 0;font-size:18px}
+.encart{background:var(--cream);padding:16px 18px;margin-top:22px;font-size:15.5px}
+.encart p+p{margin-top:6px}
+.q{padding:20px 0;border-bottom:1px solid var(--line)}
+.q>label,.q>.lab{display:block;font-weight:600;color:var(--ink);font-size:17.5px}
+.num{font:500 12px 'IBM Plex Mono',monospace;color:var(--blue);margin-right:8px}
+.pq{font-size:14.5px;color:var(--mute);margin:4px 0 10px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:84px}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--blue);border-color:transparent}
+textarea::placeholder,input::placeholder{color:#A4A8B0}
+.cases{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.cases label{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:99px;padding:7px 13px;background:#fff;font-size:15px;cursor:pointer}
+.cases input{accent-color:var(--blue)}
+.cases label:has(input:checked){border-color:var(--blue);background:#EEF1FF;color:var(--ink)}
+.pole{display:none}.pole.on{display:block}
+.barre{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#FAF6EA;display:flex;gap:12px;align-items:center;justify-content:center;padding:12px 16px;flex-wrap:wrap}
+.barre b{font:500 13px 'IBM Plex Mono',monospace}
+button{font:600 15px 'Instrument Sans',sans-serif;padding:10px 18px;border-radius:99px;border:0;cursor:pointer;background:var(--blue);color:#fff}
+button.o{background:none;border:1px solid #FAF6EA;color:#FAF6EA}
+#msg{font-size:14px;max-width:560px;text-align:center}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#FFFDF7}}
+</style>
+</head>
+<body>
+<main>
+<p class="sur">AXEM IA × Search Factory · Audit IA du 14 décembre</p>
+<h1>Vos usages de l'IA, en 10 minutes</h1>
+<p class="intro">Ce questionnaire prépare la journée du lundi 14 décembre. Il nous évite de vous poser les questions de base en atelier et nous laisse du temps pour ce qui compte : vos tâches, vos outils, ce qui marche et ce qui coince.</p>
+<div class="encart">
+<p><b>Répondez vite, à peu près.</b> Un chiffre approximatif vaut mieux qu'une case vide, et « je ne sais pas » est une bonne réponse.</p>
+<p><b>Vos réponses sont lues par AXEM IA.</b> La restitution présente des constats par pôle, jamais une réponse individuelle avec votre nom.</p>
+<p><b>Retour souhaité au plus tard le mercredi 9 décembre.</b> Vos réponses restent dans votre navigateur tant que vous n'avez pas cliqué sur « Envoyer ».</p>
+</div>
+
+<h2><small>Vous</small>Qui répond</h2>
+<div class="q"><label for="nom"><span class="num">01</span>Votre prénom et votre nom</label>
+<input type="text" id="nom" data-q="Prénom et nom"></div>
+<div class="q"><label for="pole"><span class="num">02</span>Votre pôle</label>
+<p class="pq">Deux questions plus bas changent selon votre réponse.</p>
+<select id="pole" data-q="Pôle">
+<option value="">Choisir</option>
+<option>SEO et GEO</option>
+<option>Paid</option>
+<option>Web</option>
+<option>Analytics</option>
+<option>Direction</option>
+<option>Fonctions support (administratif, finance, RH)</option>
+</select></div>
+<div class="q"><label for="poste"><span class="num">03</span>Votre poste, en quelques mots</label>
+<input type="text" id="poste" data-q="Poste" placeholder="Exemple : consultante SEO, chef de projet paid, développeur front"></div>
+
+<h2><small>Vos outils</small>L'IA chez vous aujourd'hui</h2>
+<div class="q"><span class="lab"><span class="num">04</span>Quels outils d'IA utilisez-vous pour le travail ?</span>
+<p class="pq">Cochez tout ce qui s'applique.</p>
+<div class="cases" id="outils" data-q="Outils d'IA utilisés">
+<label><input type="checkbox" value="Claude">Claude</label>
+<label><input type="checkbox" value="ChatGPT">ChatGPT</label>
+<label><input type="checkbox" value="Gemini dans Google Workspace">Gemini dans Google Workspace</label>
+<label><input type="checkbox" value="Gemini par API ou Apps Script">Gemini par API ou Apps Script</label>
+<label><input type="checkbox" value="Copilot">Copilot</label>
+<label><input type="checkbox" value="Mistral">Mistral</label>
+<label><input type="checkbox" value="Perplexity">Perplexity</label>
+<label><input type="checkbox" value="Outil d'image ou de vidéo">Outil d'image ou de vidéo</label>
+<label><input type="checkbox" value="Aucun">Aucun</label>
+</div>
+<input type="text" id="outils_autre" data-q="Autres outils d'IA" placeholder="Autre outil, ou précision" style="margin-top:10px"></div>
+<div class="q"><label for="comptes"><span class="num">05</span>Avec quel compte, pour chacun ?</label>
+<p class="pq">Licence payée par Search Factory, compte personnel, version gratuite. Précisez l'offre si vous la connaissez (Pro, Max, Team, Plus…).</p>
+<textarea id="comptes" data-q="Comptes et offres" placeholder="Exemple : Claude Pro payé par l'agence, ChatGPT gratuit sur mon compte perso, Gemini dans Gmail."></textarea></div>
+<div class="q"><label for="frequence"><span class="num">06</span>À quelle fréquence utilisez-vous l'IA pour le travail ?</label>
+<select id="frequence" data-q="Fréquence d'usage">
+<option value="">Choisir</option><option>Plusieurs fois par jour</option><option>Une fois par jour environ</option><option>Quelques fois par semaine</option><option>Rarement</option><option>Jamais</option>
+</select></div>
+<div class="q"><label for="limites"><span class="num">07</span>Vous arrive-t-il d'atteindre une limite d'usage (message « limite atteinte », attente) ?</label>
+<select id="limites" data-q="Limites d'usage atteintes">
+<option value="">Choisir</option><option>Souvent, plusieurs fois par semaine</option><option>Parfois</option><option>Jamais</option><option>Je ne sais pas</option>
+</select></div>
+
+<h2><small>Ce que l'IA fait pour vous</small>Ce qui marche, ce qui coince</h2>
+<div class="q"><label for="usages"><span class="num">08</span>Vos 3 usages principaux de l'IA, avec l'outil et le temps avant et après</label>
+<p class="pq">Ce sont vos gains réels : chacun peut devenir un cas d'usage chiffré dans le rapport.</p>
+<textarea id="usages" data-q="3 usages principaux" rows="4" placeholder="Exemple : briefs de contenu, Claude, 1 h avant, 20 min maintenant, 8 par mois."></textarea></div>
+<div class="q"><label for="decu"><span class="num">09</span>Une tâche où l'IA vous a déçu ou fait perdre du temps</label>
+<textarea id="decu" data-q="Tâche décevante" placeholder="Exemple : méta-descriptions en masse avec Gemini, trop génériques, tout repris à la main."></textarea></div>
+<div class="q"><span class="lab"><span class="num">10</span>Avez-vous créé des outils réutilisables ?</span>
+<div class="cases" id="crees" data-q="Outils réutilisables créés">
+<label><input type="checkbox" value="Skills">Skills</label>
+<label><input type="checkbox" value="Projets Claude">Projets Claude</label>
+<label><input type="checkbox" value="GPT personnalisés">GPT personnalisés</label>
+<label><input type="checkbox" value="Gems Gemini">Gems Gemini</label>
+<label><input type="checkbox" value="Prompts enregistrés">Prompts enregistrés</label>
+<label><input type="checkbox" value="Scripts ou automatisations">Scripts ou automatisations</label>
+<label><input type="checkbox" value="Non">Non</label>
+</div>
+<input type="text" id="crees_detail" data-q="Détail des outils créés" placeholder="Lesquels, en deux mots" style="margin-top:10px"></div>
+
+<h2><small>Ce que vous voudriez</small>Votre semaine</h2>
+<div class="q"><label for="envie"><span class="num">11</span>Les 2 tâches les plus longues ou répétitives de votre semaine, que vous aimeriez confier à l'IA</label>
+<p class="pq">Pour chacune : le temps qu'elle prend, sa fréquence, les outils utilisés.</p>
+<textarea id="envie" data-q="2 tâches à confier à l'IA" rows="4" placeholder="Exemple : reporting mensuel client, 2 h par client, 12 clients, Looker Studio puis Google Slides."></textarea></div>
+
+<div class="pole" data-pole="SEO et GEO">
+<div class="q"><label for="seo1"><span class="num">12</span>Quels traitements automatisés à l'IA tournent dans votre travail (Apps Script, API Gemini, autres) ? Pour quoi, à quelle fréquence, et savez-vous ce qu'ils coûtent ?</label>
+<textarea id="seo1" data-q="SEO : traitements automatisés et coût"></textarea></div>
+<div class="q"><label for="seo2"><span class="num">13</span>Comment vérifiez-vous un contenu produit avec l'IA avant de l'envoyer au client ?</label>
+<textarea id="seo2" data-q="SEO : contrôle qualité des contenus"></textarea></div>
+</div>
+<div class="pole" data-pole="Paid">
+<div class="q"><label for="paid1"><span class="num">12</span>Pour une campagne type, combien de visuels et de formats déclinez-vous, en combien de temps, avec quels outils ? Qu'attendriez-vous d'un outil de création publicitaire ?</label>
+<textarea id="paid1" data-q="Paid : déclinaison des visuels et attentes outil publicitaire"></textarea></div>
+<div class="q"><label for="paid2"><span class="num">13</span>Quels accès ou connecteurs utilisez-vous déjà avec une IA (Google Ads, Meta, GA4…), et qu'est-ce qui bloque ?</label>
+<textarea id="paid2" data-q="Paid : connecteurs et blocages"></textarea></div>
+</div>
+<div class="pole" data-pole="Web">
+<div class="q"><label for="web1"><span class="num">12</span>Pour quelles tâches de développement utilisez-vous l'IA (code, intégration, recette, documentation), et dans quel outil (navigateur, éditeur, terminal) ?</label>
+<textarea id="web1" data-q="Web : tâches de développement et outils"></textarea></div>
+<div class="q"><label for="web2"><span class="num">13</span>Qu'est-ce qui vous limite aujourd'hui : l'offre, le modèle, le contexte du projet, autre chose ?</label>
+<textarea id="web2" data-q="Web : limites actuelles"></textarea></div>
+</div>
+<div class="pole" data-pole="Analytics">
+<div class="q"><label for="ana1"><span class="num">12</span>Quels rapports ou analyses produisez-vous chaque mois (GA4, Looker Studio…), en combien de temps, et lesquels aimeriez-vous automatiser ?</label>
+<textarea id="ana1" data-q="Analytics : rapports mensuels et automatisation"></textarea></div>
+<div class="q"><label for="ana2"><span class="num">13</span>Quelles données de clients manipulez-vous, et lesquelles ne devraient jamais aller dans une IA selon vous ?</label>
+<textarea id="ana2" data-q="Analytics : données sensibles"></textarea></div>
+</div>
+<div class="pole" data-pole="Direction">
+<div class="q"><label for="dir1"><span class="num">12</span>Vos 3 priorités pour l'agence sur les 6 prochains mois, et ce qu'un audit réussi changerait pour vous</label>
+<textarea id="dir1" data-q="Direction : priorités et audit réussi"></textarea></div>
+<div class="q"><label for="dir2"><span class="num">13</span>Ce que l'agence dépense aujourd'hui en IA par mois (abonnements et API) selon vous, et les contraintes de vos clients sur l'IA (clauses, interdictions)</label>
+<textarea id="dir2" data-q="Direction : budget IA et contraintes clients"></textarea></div>
+</div>
+<div class="pole" data-pole="Fonctions support (administratif, finance, RH)">
+<div class="q"><label for="sup1"><span class="num">12</span>Quelles tâches administratives ou financières reviennent chaque mois, en combien de temps ?</label>
+<textarea id="sup1" data-q="Support : tâches récurrentes"></textarea></div>
+<div class="q"><label for="sup2"><span class="num">13</span>Savez-vous combien l'agence paie en abonnements d'IA, et où se trouvent les factures ?</label>
+<textarea id="sup2" data-q="Support : abonnements IA et factures"></textarea></div>
+</div>
+
+<h2><small>Données et niveau</small>Pour finir</h2>
+<div class="q"><label for="donnees"><span class="num">14</span>Vous arrive-t-il de mettre des données de clients dans une IA (exports, comptes, documents) ?</label>
+<p class="pq">Réponse sans jugement : elle sert à fixer des règles simples pour tout le monde.</p>
+<select id="donnees" data-q="Données clients dans une IA">
+<option value="">Choisir</option><option>Jamais</option><option>Parfois, en les anonymisant</option><option>Parfois, telles quelles</option><option>Souvent</option><option>Je ne sais pas</option>
+</select></div>
+<div class="q"><label for="niveau"><span class="num">15</span>Votre niveau avec l'IA, selon vous</label>
+<select id="niveau" data-q="Niveau">
+<option value="">Choisir</option><option>Débutant</option><option>À l'aise sur les usages courants</option><option>Avancé (projets, skills, connecteurs)</option><option>Expert (API, scripts, agents)</option>
+</select>
+<input type="text" id="apprendre" data-q="Ce que j'aimerais savoir faire" placeholder="Ce que vous aimeriez savoir faire" style="margin-top:10px"></div>
+</main>
+
+<div class="barre"><b id="n">0 / 15</b><button id="env">Envoyer à AXEM IA</button><button class="o" id="cop">Copier mes réponses</button><span id="msg"></span></div>
+
+<script>
+const DEST='zeitoun.alexis@gmail.com', K='sf-questionnaire-equipe';
+const champs=()=>[...document.querySelectorAll('[data-q]')].filter(el=>!el.closest('.pole')||el.closest('.pole').classList.contains('on'));
+const val=el=>el.classList.contains('cases')?[...el.querySelectorAll('input:checked')].map(i=>i.value).join(', '):el.value.trim();
+const montrerPole=()=>{const p=document.getElementById('pole').value;document.querySelectorAll('.pole').forEach(b=>b.classList.toggle('on',b.dataset.pole===p));};
+function sauver(){const s={};document.querySelectorAll('[data-q]').forEach(el=>{s[el.id]=el.classList.contains('cases')?[...el.querySelectorAll('input:checked')].map(i=>i.value):el.value});try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}}
+function charger(){let s={};try{s=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+ document.querySelectorAll('[data-q]').forEach(el=>{const v=s[el.id];if(v==null)return;if(el.classList.contains('cases'))el.querySelectorAll('input').forEach(i=>i.checked=v.includes(i.value));else el.value=v;});}
+function compter(){const qs=[...document.querySelectorAll('.q')].filter(q=>!q.closest('.pole')||q.closest('.pole').classList.contains('on'));
+ const faites=qs.filter(q=>[...q.querySelectorAll('[data-q]')].some(el=>val(el))).length;document.getElementById('n').textContent=faites+' / '+qs.length;}
+function texte(){return 'Questionnaire avant l\'audit IA, Search Factory\n\n'+champs().map(el=>el.dataset.q+' :\n'+(val(el)||'(sans réponse)')).join('\n\n');}
+function maj(){montrerPole();sauver();compter();}
+charger();montrerPole();compter();
+document.addEventListener('input',maj);document.addEventListener('change',maj);
+const msg=t=>document.getElementById('msg').textContent=t;
+async function copier(){try{await navigator.clipboard.writeText(texte());return true}catch(e){return false}}
+document.getElementById('cop').onclick=async()=>msg(await copier()?'Réponses copiées. Collez-les dans un mail à '+DEST+'.':'Copie impossible : sélectionnez le texte à la main.');
+document.getElementById('env').onclick=async()=>{
+ const nom=document.getElementById('nom').value.trim()||'sans nom';
+ const sujet='Questionnaire audit IA Search Factory, '+nom;
+ const t=texte();
+ if(t.length<=1700){location.href='mailto:'+DEST+'?subject='+encodeURIComponent(sujet)+'&body='+encodeURIComponent(t);msg('Votre messagerie s\'ouvre avec vos réponses : il reste à cliquer sur Envoyer.');}
+ else{const ok=await copier();location.href='mailto:'+DEST+'?subject='+encodeURIComponent(sujet)+'&body='+encodeURIComponent(ok?'Mes réponses sont copiées : collez-les ici (Ctrl+V ou Cmd+V).\n\n':'');
+  msg(ok?'Vos réponses sont copiées et votre messagerie s\'ouvre : collez-les dans le mail, puis envoyez.':'Copie impossible : utilisez « Copier mes réponses ».');}
+};
+</script>
+</body>
+</html>
